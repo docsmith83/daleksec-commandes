@@ -24,6 +24,7 @@ body{background:#0a0400;color:#c8a86a;font-family:'Cardo',serif;min-height:100vh
 .cmd-desc{font-size:11px;color:#7a5830;line-height:1.4}
 .badge-mod{background:#1a0a20;border:1px solid #7060ff;color:#9080ff;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
 .badge-streamer{background:#200a00;border:1px solid #c04020;color:#c04020;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
+.badge-new{background:#0a2000;border:1px solid #60c040;color:#90d060;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
 .footer{text-align:center;padding:30px;color:#3a2000;font-size:11px;letter-spacing:2px;margin-top:20px}
 </style>
 </head>
@@ -49,18 +50,51 @@ body{background:#0a0400;color:#c8a86a;font-family:'Cardo',serif;min-height:100vh
   <div class="card">
     <div class="card-h"><span class="ico">🎮</span><span class="title">Jeux & Divertissement</span></div>
     <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!roulette X</span><span class="cmd-desc">Jouer à la roulette (X = mise)</span></div>
+      <div class="cmd"><span class="cmd-name">!roulette X</span><span class="cmd-desc">Jouer à la roulette (X = mise) — roue animée à l'écran <span class="badge-new">NOUVEAU</span></span></div>
       <div class="cmd"><span class="cmd-name">!duel @pseudo X</span><span class="cmd-desc">Défier un viewer en duel</span></div>
       <div class="cmd"><span class="cmd-name">!loterie</span><span class="cmd-desc">Participer à la loterie active</span></div>
       <div class="cmd"><span class="cmd-name">!attaquer</span><span class="cmd-desc">Attaquer le boss de stream actif</span></div>
       <div class="cmd"><span class="cmd-name">!8ball question</span><span class="cmd-desc">La boule magique de Dalek Sec</span></div>
+      <div class="cmd"><span class="cmd-name">!anomalie</span><span class="cmd-desc">Repérer le glitch caché dans l'overlay avant les autres (+25pts) <span class="badge-new">NOUVEAU</span></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><span class="ico">⚔</span><span class="title">RPG Steampunk</span></div>
+    <div class="card-b">
+      <div class="cmd"><span class="cmd-name">!rpg creer &lt;classe&gt;</span><span class="cmd-desc">Créer un personnage (ingenieur, alchimiste, corsaire, espion)</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg statut</span><span class="cmd-desc">Voir ses stats RPG</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg aventure &lt;n°&gt;</span><span class="cmd-desc">Partir en quête</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg combattre</span><span class="cmd-desc">Affronter l'ennemi de la quête en cours</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg repos</span><span class="cmd-desc">Récupérer tous ses HP (coûte des points)</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg top</span><span class="cmd-desc">Classement des aventuriers</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><span class="ico">🤝</span><span class="title">Clans & Pactes <span class="badge-new">NOUVEAU</span></span></div>
+    <div class="card-b">
+      <div class="cmd"><span class="cmd-name">!clan creer &lt;nom&gt;</span><span class="cmd-desc">Créer un clan</span></div>
+      <div class="cmd"><span class="cmd-name">!clan rejoindre &lt;nom&gt;</span><span class="cmd-desc">Rejoindre un clan existant</span></div>
+      <div class="cmd"><span class="cmd-name">!clan statut / liste / classement</span><span class="cmd-desc">Infos sur les clans</span></div>
+      <div class="cmd"><span class="cmd-name">!pacte @pseudo</span><span class="cmd-desc">Proposer un Pacte de Vapeur (alliance à deux)</span></div>
+      <div class="cmd"><span class="cmd-name">!pacte accepter</span><span class="cmd-desc">Accepter un pacte proposé</span></div>
+      <div class="cmd"><span class="cmd-name">!pacte statut / rompre</span><span class="cmd-desc">Voir ou rompre son pacte — bonus si les deux partenaires gagnent un combat RPG proche dans le temps</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><span class="ico">🕵</span><span class="title">Jeux Sociaux</span></div>
+    <div class="card-b">
+      <div class="cmd"><span class="cmd-name">!accuser @pseudo</span><span class="cmd-desc">Accuser un viewer pendant un jeu d'Imposteur actif</span></div>
+      <div class="cmd"><span class="cmd-name">!demasquer @pseudo</span><span class="cmd-desc">Tenter de démasquer l'Agent Infiltré actif (+40pts si correct) <span class="badge-new">NOUVEAU</span></span></div>
+      <div class="cmd"><span class="cmd-name">!agent demarrer</span><span class="cmd-desc badge-streamer">Activer un Agent Infiltré <span class="badge-streamer">STREAMER</span></span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-h"><span class="ico">⚖</span><span class="title">Procès & Justice</span></div>
     <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!accuser @pseudo</span><span class="cmd-desc">Accuser un viewer devant Dalek Sec</span></div>
       <div class="cmd"><span class="cmd-name">!coupable</span><span class="cmd-desc">Voter "coupable" lors d'un procès</span></div>
       <div class="cmd"><span class="cmd-name">!innocent</span><span class="cmd-desc">Voter "innocent" lors d'un procès</span></div>
       <div class="cmd"><span class="cmd-name">!soutenir</span><span class="cmd-desc">Soutenir l'accusé</span></div>
@@ -82,13 +116,21 @@ body{background:#0a0400;color:#c8a86a;font-family:'Cardo',serif;min-height:100vh
   </div>
 
   <div class="card">
+    <div class="card-h"><span class="ico">🔬</span><span class="title">Scan & Archives <span class="badge-new">NOUVEAU</span></span></div>
+    <div class="card-b">
+      <div class="cmd"><span class="cmd-name">!scan @pseudo</span><span class="cmd-desc">Génère une fiche d'archives biométriques (image), postée sur Discord + lien donné en chat</span></div>
+      <div class="cmd"><span class="cmd-name">!memoire @pseudo</span><span class="cmd-desc">Voir ce que Dalek Sec a mémorisé sur un viewer</span></div>
+      <div class="cmd"><span class="cmd-name">!souvenir texte</span><span class="cmd-desc">Faire mémoriser un fait à Dalek Sec</span></div>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="card-h"><span class="ico">👤</span><span class="title">Profil Personnel</span></div>
     <div class="card-b">
       <div class="cmd"><span class="cmd-name">!mongenre m/f/n</span><span class="cmd-desc">Définir son genre (masculin/féminin/neutre)</span></div>
       <div class="cmd"><span class="cmd-name">!anniversaire JJ/MM</span><span class="cmd-desc">Enregistrer son anniversaire</span></div>
       <div class="cmd"><span class="cmd-name">!corruption</span><span class="cmd-desc">Voir son niveau de corruption actuel</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg</span><span class="cmd-desc">Voir son profil RPG steampunk</span></div>
-      <div class="cmd"><span class="cmd-name">!souvenir</span><span class="cmd-desc">Dalek Sec cite un ancien message</span></div>
+      <div class="cmd"><span class="cmd-name">!rpg statut</span><span class="cmd-desc">Voir son profil RPG steampunk</span></div>
     </div>
   </div>
 
