@@ -4,183 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Commandes — Dalek Sec</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@500;700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#070402;--metal:#140b05;--metal2:#1d1109;--cu:#a8642a;--cu2:#d8913f;--br:#e8b94f;--br2:#ffe08a;--tx:#e6d3ae;--tx2:#bfa57a;--line:rgba(216,145,63,.28)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a0400;color:#c8a86a;font-family:'Cardo',serif;min-height:100vh;padding:20px}
-.header{text-align:center;padding:30px 20px;border-bottom:1px solid rgba(184,134,11,0.3);margin-bottom:30px}
-.logo{font-family:'Cinzel Decorative',serif;font-size:28px;color:#e8c87a;letter-spacing:4px;margin-bottom:8px}
-.subtitle{font-size:13px;color:#7a5830;letter-spacing:2px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;max-width:1200px;margin:0 auto}
-.card{background:#120800;border:1px solid rgba(184,134,11,0.25);border-radius:4px;overflow:hidden}
-.card-h{background:#1a0a00;padding:10px 16px;border-bottom:1px solid rgba(184,134,11,0.2);display:flex;align-items:center;gap:8px}
-.card-h .ico{font-size:16px}
-.card-h .title{font-size:11px;color:#b8860b;letter-spacing:2px;text-transform:uppercase;font-weight:bold}
-.card-h .badge{margin-left:auto;font-size:9px;background:#1e0e00;border:1px solid rgba(184,134,11,0.3);color:#7a5830;padding:2px 6px;border-radius:2px}
-.card-b{padding:10px 14px;display:flex;flex-direction:column;gap:6px}
-.cmd{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid rgba(184,134,11,0.08)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Cardo',serif;font-size:17px;line-height:1.5;min-height:100vh;padding:0 16px 40px;
+ background-image:radial-gradient(ellipse 80% 40% at 50% 0,rgba(216,145,63,.16),transparent 70%),radial-gradient(ellipse 60% 30% at 50% 100%,rgba(168,100,42,.10),transparent 70%),repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0 2px,transparent 2px 5px);background-attachment:fixed}
+.top{max-width:1240px;margin:0 auto;text-align:center;padding:38px 0 22px;position:relative}
+.logo{font-family:'Cinzel Decorative',serif;font-weight:700;font-size:clamp(30px,6vw,52px);letter-spacing:.14em;background:linear-gradient(180deg,var(--br2),var(--br) 45%,var(--cu));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+.logo .g{display:inline-block;color:var(--br);-webkit-text-fill-color:var(--br);animation:spin 18s linear infinite;margin-right:.2em}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sub{font-family:'Cinzel',serif;font-size:14px;color:var(--tx2);letter-spacing:.28em;text-transform:uppercase;margin-top:6px}
+.rule{height:10px;margin:22px auto 0;max-width:760px;background:linear-gradient(90deg,transparent,var(--cu),var(--br),var(--cu),transparent);clip-path:polygon(0 50%,48% 50%,50% 0,52% 50%,100% 50%,52% 100%,50% 100%,48% 50%);opacity:.8;height:12px}
+.tools{max-width:1240px;margin:8px auto 26px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;position:sticky;top:0;z-index:5;padding:10px 0;background:linear-gradient(var(--bg) 70%,transparent)}
+.search{flex:1 1 320px;max-width:520px;position:relative}
+.search input{width:100%;padding:13px 16px 13px 44px;font:inherit;font-size:17px;color:var(--br2);background:linear-gradient(#0c0603,#150b05);border:2px solid var(--cu);border-radius:6px;outline:none;box-shadow:inset 0 2px 8px #000,0 0 0 1px #000}
+.search input:focus{border-color:var(--br);box-shadow:inset 0 2px 8px #000,0 0 14px rgba(232,185,79,.35)}
+.search input::placeholder{color:#8a6f48}
+.search:before{content:"⚲";position:absolute;left:15px;top:50%;transform:translateY(-52%) rotate(-45deg);color:var(--cu2);font-size:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{font:700 13px 'Cinzel',serif;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2);background:linear-gradient(#1f1209,#120a05);border:1.5px solid var(--cu);border-radius:5px;padding:9px 14px;cursor:pointer}
+.chip:hover{color:var(--br2)}
+.chip.on{color:#1a0d02;background:linear-gradient(var(--br2),var(--br) 50%,var(--cu2));border-color:var(--br2);box-shadow:0 0 12px rgba(232,185,79,.4)}
+.count{width:100%;text-align:center;font-size:14px;color:var(--tx2);font-style:italic}
+.grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:24px}
+.card{position:relative;border:5px solid transparent;border-radius:10px;margin:2px;
+ background:linear-gradient(180deg,var(--metal2),var(--metal) 40%,#0d0703) padding-box,linear-gradient(135deg,var(--br) 0,var(--cu) 30%,#5a2f10 55%,var(--cu2) 80%,var(--br) 100%) border-box;
+ box-shadow:0 0 0 1px #000,0 10px 28px rgba(0,0,0,.7),inset 0 0 40px rgba(0,0,0,.6)}
+.card header{display:flex;align-items:center;gap:12px;padding:13px 18px;background:linear-gradient(180deg,#2a170a,#170c05);border-bottom:2px solid var(--cu);border-radius:5px 5px 0 0;box-shadow:inset 0 1px 0 rgba(255,224,138,.15)}
+.ico{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:50%;font-size:20px;background:radial-gradient(circle at 35% 30%,#3a2210,#0f0803);border:2px solid var(--br);box-shadow:inset 0 0 8px #000,0 0 8px rgba(232,185,79,.25)}
+.card h2{font:700 16px 'Cinzel',serif;letter-spacing:.14em;text-transform:uppercase;color:var(--br);text-shadow:0 1px 0 #000}
+.card header .bd{margin-left:auto}
+.card ul{list-style:none;padding:6px 18px 16px}
+.cmd{padding:12px 0;border-bottom:1px solid var(--line)}
 .cmd:last-child{border-bottom:none}
-.cmd-name{font-family:monospace;font-size:12px;color:#d4a843;font-weight:bold;min-width:160px;flex-shrink:0}
-.cmd-desc{font-size:11px;color:#7a5830;line-height:1.4}
-.badge-mod{background:#1a0a20;border:1px solid #7060ff;color:#9080ff;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
-.badge-streamer{background:#200a00;border:1px solid #c04020;color:#c04020;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
-.badge-new{background:#0a2000;border:1px solid #60c040;color:#90d060;font-size:9px;padding:1px 5px;border-radius:2px;white-space:nowrap}
-.footer{text-align:center;padding:30px;color:#3a2000;font-size:11px;letter-spacing:2px;margin-top:20px}
+.nm{font:700 16px ui-monospace,Menlo,Consolas,monospace;color:var(--br2);background:#0a0502;border:1px solid rgba(232,185,79,.4);border-radius:4px;padding:3px 9px;cursor:pointer;text-align:left;margin-right:6px;transition:.15s}
+.nm:hover{background:#26150a;border-color:var(--br);box-shadow:0 0 10px rgba(232,185,79,.3)}
+.cmd p{margin-top:6px;color:var(--tx);font-size:16px;line-height:1.45}
+.bd{display:inline-block;font:700 11px 'Cinzel',serif;letter-spacing:.12em;padding:3px 8px;border-radius:3px;vertical-align:middle;white-space:nowrap;border:1.5px solid}
+.b-new{color:#baf08a;background:linear-gradient(#17300c,#0c1c06);border-color:#6fbf45}
+.b-str{color:#ffb08a;background:linear-gradient(#3a1308,#210a04);border-color:#d6532a}
+.b-mod{color:#c4b8ff;background:linear-gradient(#1f1840,#120d28);border-color:#8070ff}
+.rv{position:absolute;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--br2),var(--cu) 60%,#3a1c08);box-shadow:0 1px 2px #000}
+.tl{top:-2px;left:-2px}.tr{top:-2px;right:-2px}.bl{bottom:-2px;left:-2px}.br{bottom:-2px;right:-2px}
+.hide{display:none!important}
+.none{max-width:600px;margin:40px auto;text-align:center;color:var(--tx2);font-style:italic;display:none}
+footer{text-align:center;margin-top:44px;font:500 13px 'Cinzel',serif;letter-spacing:.25em;color:#8a6a40;text-transform:uppercase}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#1d1109;border:2px solid var(--br);color:var(--br2);padding:10px 20px;border-radius:6px;font:700 14px 'Cinzel',serif;letter-spacing:.1em;transition:.25s;z-index:20}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:520px){body{font-size:16px;padding:0 10px 30px}.card ul{padding:4px 14px 14px}.card header{padding:11px 14px}}
 </style>
 </head>
 <body>
-<div class="header">
-  <div class="logo">⚙ DALEK SEC</div>
-  <div class="subtitle">Archives des commandes — Specimens autorisés uniquement</div>
+<div class="top">
+  <div class="logo"><span class="g">⚙</span>DALEK SEC</div>
+  <div class="sub">Archives des commandes — Spécimens autorisés uniquement</div>
+  <div class="rule"></div>
 </div>
-
-<div class="grid">
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🪙</span><span class="title">Points & Classement</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!points</span><span class="cmd-desc">Voir ses points de soumission</span></div>
-      <div class="cmd"><span class="cmd-name">!top</span><span class="cmd-desc">Classement top 3 des viewers</span></div>
-      <div class="cmd"><span class="cmd-name">!donner @pseudo X</span><span class="cmd-desc">Donner des points à un autre viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!voler @pseudo</span><span class="cmd-desc">Tenter de voler des points (risqué)</span></div>
-      <div class="cmd"><span class="cmd-name">!grades</span><span class="cmd-desc">Voir les grades disponibles</span></div>
-    </div>
+<div class="tools">
+  <div class="search"><input id="q" type="search" placeholder="Chercher une commande…" autocomplete="off" aria-label="Chercher une commande"></div>
+  <div class="chips" id="tabs" role="tablist">
+    <button class="chip on" data-r="viewer">Viewers</button>
+    <button class="chip" data-r="mod">Modos</button>
+    <button class="chip" data-r="streamer">Streamer</button>
+    <button class="chip" data-r="">Tout</button>
   </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🎮</span><span class="title">Jeux & Divertissement</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!roulette X</span><span class="cmd-desc">Jouer à la roulette (X = mise) — roue animée à l'écran <span class="badge-new">NOUVEAU</span></span></div>
-      <div class="cmd"><span class="cmd-name">!duel @pseudo X</span><span class="cmd-desc">Défier un viewer en duel</span></div>
-      <div class="cmd"><span class="cmd-name">!loterie</span><span class="cmd-desc">Participer à la loterie active</span></div>
-      <div class="cmd"><span class="cmd-name">!attaquer</span><span class="cmd-desc">Attaquer le boss de stream actif</span></div>
-      <div class="cmd"><span class="cmd-name">!8ball question</span><span class="cmd-desc">La boule magique de Dalek Sec</span></div>
-      <div class="cmd"><span class="cmd-name">!anomalie</span><span class="cmd-desc">Repérer le glitch caché dans l'overlay avant les autres (+25pts) <span class="badge-new">NOUVEAU</span></span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">⚔</span><span class="title">RPG Steampunk</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!rpg creer &lt;classe&gt;</span><span class="cmd-desc">Créer un personnage (ingenieur, alchimiste, corsaire, espion)</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg statut</span><span class="cmd-desc">Voir ses stats RPG</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg aventure &lt;n°&gt;</span><span class="cmd-desc">Partir en quête</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg combattre</span><span class="cmd-desc">Affronter l'ennemi de la quête en cours</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg repos</span><span class="cmd-desc">Récupérer tous ses HP (coûte des points)</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg top</span><span class="cmd-desc">Classement des aventuriers</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🤝</span><span class="title">Clans & Pactes <span class="badge-new">NOUVEAU</span></span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!clan creer &lt;nom&gt;</span><span class="cmd-desc">Créer un clan</span></div>
-      <div class="cmd"><span class="cmd-name">!clan rejoindre &lt;nom&gt;</span><span class="cmd-desc">Rejoindre un clan existant</span></div>
-      <div class="cmd"><span class="cmd-name">!clan statut / liste / classement</span><span class="cmd-desc">Infos sur les clans</span></div>
-      <div class="cmd"><span class="cmd-name">!pacte @pseudo</span><span class="cmd-desc">Proposer un Pacte de Vapeur (alliance à deux)</span></div>
-      <div class="cmd"><span class="cmd-name">!pacte accepter</span><span class="cmd-desc">Accepter un pacte proposé</span></div>
-      <div class="cmd"><span class="cmd-name">!pacte statut / rompre</span><span class="cmd-desc">Voir ou rompre son pacte — bonus si les deux partenaires gagnent un combat RPG proche dans le temps</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🕵</span><span class="title">Jeux Sociaux</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!accuser @pseudo</span><span class="cmd-desc">Accuser un viewer pendant un jeu d'Imposteur actif</span></div>
-      <div class="cmd"><span class="cmd-name">!demasquer @pseudo</span><span class="cmd-desc">Tenter de démasquer l'Agent Infiltré actif (+40pts si correct) <span class="badge-new">NOUVEAU</span></span></div>
-      <div class="cmd"><span class="cmd-name">!agent demarrer</span><span class="cmd-desc badge-streamer">Activer un Agent Infiltré <span class="badge-streamer">STREAMER</span></span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">⚖</span><span class="title">Procès & Justice</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!coupable</span><span class="cmd-desc">Voter "coupable" lors d'un procès</span></div>
-      <div class="cmd"><span class="cmd-name">!innocent</span><span class="cmd-desc">Voter "innocent" lors d'un procès</span></div>
-      <div class="cmd"><span class="cmd-name">!soutenir</span><span class="cmd-desc">Soutenir l'accusé</span></div>
-      <div class="cmd"><span class="cmd-name">!trahir</span><span class="cmd-desc">Trahir l'accusé</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🎭</span><span class="title">Fun & Social</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!amour @p1 @p2</span><span class="cmd-desc">Compatibilité steampunk entre deux viewers</span></div>
-      <div class="cmd"><span class="cmd-name">!mariage @pseudo</span><span class="cmd-desc">Demander en mariage un viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!lurk</span><span class="cmd-desc">Annoncer qu'on regarde en silence</span></div>
-      <div class="cmd"><span class="cmd-name">!météo @pseudo</span><span class="cmd-desc">Météo personnelle sarcastique</span></div>
-      <div class="cmd"><span class="cmd-name">!citation</span><span class="cmd-desc">Afficher une citation mémorable</span></div>
-      <div class="cmd"><span class="cmd-name">!surnom</span><span class="cmd-desc">Voir son surnom steampunk</span></div>
-      <div class="cmd"><span class="cmd-name">!dossier</span><span class="cmd-desc">Voir son dossier dans les archives</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🔬</span><span class="title">Scan & Archives <span class="badge-new">NOUVEAU</span></span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!scan @pseudo</span><span class="cmd-desc">Génère une fiche d'archives biométriques (image), postée sur Discord + lien donné en chat</span></div>
-      <div class="cmd"><span class="cmd-name">!memoire @pseudo</span><span class="cmd-desc">Voir ce que Dalek Sec a mémorisé sur un viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!souvenir texte</span><span class="cmd-desc">Faire mémoriser un fait à Dalek Sec</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">👤</span><span class="title">Profil Personnel</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!mongenre m/f/n</span><span class="cmd-desc">Définir son genre (masculin/féminin/neutre)</span></div>
-      <div class="cmd"><span class="cmd-name">!anniversaire JJ/MM</span><span class="cmd-desc">Enregistrer son anniversaire</span></div>
-      <div class="cmd"><span class="cmd-name">!corruption</span><span class="cmd-desc">Voir son niveau de corruption actuel</span></div>
-      <div class="cmd"><span class="cmd-name">!rpg statut</span><span class="cmd-desc">Voir son profil RPG steampunk</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">⚠</span><span class="title">Wanted & Primes</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!wantedlist</span><span class="cmd-desc">Voir la liste des wanted actifs</span></div>
-      <div class="cmd"><span class="cmd-name">!capturer</span><span class="cmd-desc">Tenter de capturer un wanted</span></div>
-      <div class="cmd"><span class="cmd-name">!wanted @pseudo X raison</span><span class="cmd-desc badge-mod">Mettre une prime <span class="badge-mod">MOD</span></span></div>
-      <div class="cmd"><span class="cmd-name">!nowanted @pseudo</span><span class="cmd-desc badge-mod">Retirer une prime <span class="badge-mod">MOD</span></span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">📊</span><span class="title">Infos Stream</span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!uptime</span><span class="cmd-desc">Durée du stream en cours</span></div>
-      <div class="cmd"><span class="cmd-name">!jeu</span><span class="cmd-desc">Jeu en cours</span></div>
-      <div class="cmd"><span class="cmd-name">!viewers</span><span class="cmd-desc">Nombre de viewers actuels</span></div>
-      <div class="cmd"><span class="cmd-name">!stats</span><span class="cmd-desc">Stats de la session (morts, viewers...)</span></div>
-      <div class="cmd"><span class="cmd-name">!quetes</span><span class="cmd-desc">Voir les quêtes actives</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">☢</span><span class="title">Chaos & Dingueries <span class="badge-new">NOUVEAU</span></span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!allin</span><span class="cmd-desc">Mise TOUS ses points sur un seul jet, tout ou rien</span></div>
-      <div class="cmd"><span class="cmd-name">!bourse</span><span class="cmd-desc">Voir le cours actuel de la Vapeur</span></div>
-      <div class="cmd"><span class="cmd-name">!investir X</span><span class="cmd-desc">Investir X points dans la Vapeur (cours fluctuant)</span></div>
-      <div class="cmd"><span class="cmd-name">!vendre</span><span class="cmd-desc">Liquider toutes ses parts au cours actuel</span></div>
-      <div class="cmd"><span class="cmd-name">!reparer</span><span class="cmd-desc">Contribuer à désamorcer l'auto-destruction (si active)</span></div>
-      <div class="cmd"><span class="cmd-name">!clone</span><span class="cmd-desc badge-streamer">Invoquer le clone corrompu de Dalek Sec <span class="badge-streamer">STREAMER</span></span></div>
-      <div class="cmd"><span class="cmd-name">!chaos</span><span class="cmd-desc badge-streamer">75s de réinterprétation aléatoire du chat <span class="badge-streamer">STREAMER</span></span></div>
-      <div class="cmd"><span class="cmd-name">!autodestruction [min] [seuil]</span><span class="cmd-desc badge-streamer">Compte à rebours collectif, explosion si échec <span class="badge-streamer">STREAMER</span></span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-h"><span class="ico">🛡</span><span class="title">Modération <span class="badge">MODS</span></span></div>
-    <div class="card-b">
-      <div class="cmd"><span class="cmd-name">!genre @pseudo m/f/n</span><span class="cmd-desc">Définir le genre d'un viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!punition @pseudo</span><span class="cmd-desc">Punir un viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!grace @pseudo</span><span class="cmd-desc">Gracier un viewer</span></div>
-      <div class="cmd"><span class="cmd-name">!whitelist add/remove domaine</span><span class="cmd-desc">Gérer les liens autorisés</span></div>
-    </div>
-  </div>
-
+  <div class="chips"><button class="chip" id="nw">Nouveautés</button></div>
+  <div class="count" id="count">66 commandes — clique sur une commande pour la copier</div>
 </div>
-
-<div class="footer">⚙ Dalek Sec — Archives permanentes — docteursmith83</div>
+<main class="grid" id="grid">
+<section class="card" data-cat="Points &amp; Classement"><header><span class="ico">🪙</span><h2>Points & Classement</h2></header><ul><li class="cmd" data-t="!points voir ses points de soumission" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!points</button><p>Voir ses points de soumission</p></li><li class="cmd" data-t="!top classement top 3 des viewers" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!top</button><p>Classement top 3 des viewers</p></li><li class="cmd" data-t="!donner @pseudo x donner des points à un autre viewer" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!donner @pseudo X</button><p>Donner des points à un autre viewer</p></li><li class="cmd" data-t="!voler @pseudo tenter de voler des points (risqué)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!voler @pseudo</button><p>Tenter de voler des points (risqué)</p></li><li class="cmd" data-t="!grades voir les grades disponibles" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!grades</button><p>Voir les grades disponibles</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Jeux &amp; Divertissement"><header><span class="ico">🎮</span><h2>Jeux & Divertissement</h2></header><ul><li class="cmd" data-t="!roulette x jouer à la roulette (x = mise) — roue animée à l&#x27;écran" data-b="new" data-r="viewer"><button class="nm" title="Copier la commande">!roulette X</button><span class="bd b-new">NOUVEAU</span><p>Jouer à la roulette (X = mise) — roue animée à l'écran</p></li><li class="cmd" data-t="!duel @pseudo x défier un viewer en duel" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!duel @pseudo X</button><p>Défier un viewer en duel</p></li><li class="cmd" data-t="!loterie participer à la loterie active" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!loterie</button><p>Participer à la loterie active</p></li><li class="cmd" data-t="!attaquer attaquer le boss de stream actif" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!attaquer</button><p>Attaquer le boss de stream actif</p></li><li class="cmd" data-t="!8ball question la boule magique de dalek sec" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!8ball question</button><p>La boule magique de Dalek Sec</p></li><li class="cmd" data-t="!anomalie repérer le glitch caché dans l&#x27;overlay avant les autres (+25pts)" data-b="new" data-r="viewer"><button class="nm" title="Copier la commande">!anomalie</button><span class="bd b-new">NOUVEAU</span><p>Repérer le glitch caché dans l'overlay avant les autres (+25pts)</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="RPG Steampunk"><header><span class="ico">⚔</span><h2>RPG Steampunk</h2></header><ul><li class="cmd" data-t="!rpg creer &amp;lt;classe&amp;gt; créer un personnage (ingenieur, alchimiste, corsaire, espion)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg creer &lt;classe&gt;</button><p>Créer un personnage (ingenieur, alchimiste, corsaire, espion)</p></li><li class="cmd" data-t="!rpg statut voir ses stats rpg" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg statut</button><p>Voir ses stats RPG</p></li><li class="cmd" data-t="!rpg aventure &amp;lt;n°&amp;gt; partir en quête" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg aventure &lt;n°&gt;</button><p>Partir en quête</p></li><li class="cmd" data-t="!rpg combattre affronter l&#x27;ennemi de la quête en cours" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg combattre</button><p>Affronter l'ennemi de la quête en cours</p></li><li class="cmd" data-t="!rpg repos récupérer tous ses hp (coûte des points)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg repos</button><p>Récupérer tous ses HP (coûte des points)</p></li><li class="cmd" data-t="!rpg top classement des aventuriers" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg top</button><p>Classement des aventuriers</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Clans &amp; Pactes"><header><span class="ico">🤝</span><h2>Clans & Pactes</h2><span class="bd b-new">NOUVEAU</span></header><ul><li class="cmd" data-t="!clan creer &amp;lt;nom&amp;gt; créer un clan" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!clan creer &lt;nom&gt;</button><p>Créer un clan</p></li><li class="cmd" data-t="!clan rejoindre &amp;lt;nom&amp;gt; rejoindre un clan existant" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!clan rejoindre &lt;nom&gt;</button><p>Rejoindre un clan existant</p></li><li class="cmd" data-t="!clan statut / liste / classement infos sur les clans" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!clan statut / liste / classement</button><p>Infos sur les clans</p></li><li class="cmd" data-t="!pacte @pseudo proposer un pacte de vapeur (alliance à deux)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!pacte @pseudo</button><p>Proposer un Pacte de Vapeur (alliance à deux)</p></li><li class="cmd" data-t="!pacte accepter accepter un pacte proposé" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!pacte accepter</button><p>Accepter un pacte proposé</p></li><li class="cmd" data-t="!pacte statut / rompre voir ou rompre son pacte — bonus si les deux partenaires gagnent un combat rpg proche dans le temps" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!pacte statut / rompre</button><p>Voir ou rompre son pacte — bonus si les deux partenaires gagnent un combat RPG proche dans le temps</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Jeux Sociaux"><header><span class="ico">🕵</span><h2>Jeux Sociaux</h2></header><ul><li class="cmd" data-t="!accuser @pseudo accuser un viewer pendant un jeu d&#x27;imposteur actif" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!accuser @pseudo</button><p>Accuser un viewer pendant un jeu d'Imposteur actif</p></li><li class="cmd" data-t="!demasquer @pseudo tenter de démasquer l&#x27;agent infiltré actif (+40pts si correct)" data-b="new" data-r="viewer"><button class="nm" title="Copier la commande">!demasquer @pseudo</button><span class="bd b-new">NOUVEAU</span><p>Tenter de démasquer l'Agent Infiltré actif (+40pts si correct)</p></li><li class="cmd" data-t="!agent demarrer activer un agent infiltré" data-b="streamer" data-r="streamer"><button class="nm" title="Copier la commande">!agent demarrer</button><span class="bd b-str">STREAMER</span><p>Activer un Agent Infiltré</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Procès &amp; Justice"><header><span class="ico">⚖</span><h2>Procès & Justice</h2></header><ul><li class="cmd" data-t="!coupable voter &quot;coupable&quot; lors d&#x27;un procès" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!coupable</button><p>Voter "coupable" lors d'un procès</p></li><li class="cmd" data-t="!innocent voter &quot;innocent&quot; lors d&#x27;un procès" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!innocent</button><p>Voter "innocent" lors d'un procès</p></li><li class="cmd" data-t="!soutenir soutenir l&#x27;accusé" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!soutenir</button><p>Soutenir l'accusé</p></li><li class="cmd" data-t="!trahir trahir l&#x27;accusé" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!trahir</button><p>Trahir l'accusé</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Fun &amp; Social"><header><span class="ico">🎭</span><h2>Fun & Social</h2></header><ul><li class="cmd" data-t="!amour @p1 @p2 compatibilité steampunk entre deux viewers" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!amour @p1 @p2</button><p>Compatibilité steampunk entre deux viewers</p></li><li class="cmd" data-t="!mariage @pseudo demander en mariage un viewer" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!mariage @pseudo</button><p>Demander en mariage un viewer</p></li><li class="cmd" data-t="!lurk annoncer qu&#x27;on regarde en silence" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!lurk</button><p>Annoncer qu'on regarde en silence</p></li><li class="cmd" data-t="!météo @pseudo météo personnelle sarcastique" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!météo @pseudo</button><p>Météo personnelle sarcastique</p></li><li class="cmd" data-t="!citation afficher une citation mémorable" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!citation</button><p>Afficher une citation mémorable</p></li><li class="cmd" data-t="!surnom voir son surnom steampunk" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!surnom</button><p>Voir son surnom steampunk</p></li><li class="cmd" data-t="!dossier voir son dossier dans les archives" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!dossier</button><p>Voir son dossier dans les archives</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Scan &amp; Archives"><header><span class="ico">🔬</span><h2>Scan & Archives</h2><span class="bd b-new">NOUVEAU</span></header><ul><li class="cmd" data-t="!scan @pseudo génère une fiche d&#x27;archives biométriques (image), postée sur discord + lien donné en chat" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!scan @pseudo</button><p>Génère une fiche d'archives biométriques (image), postée sur Discord + lien donné en chat</p></li><li class="cmd" data-t="!memoire @pseudo voir ce que dalek sec a mémorisé sur un viewer" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!memoire @pseudo</button><p>Voir ce que Dalek Sec a mémorisé sur un viewer</p></li><li class="cmd" data-t="!souvenir texte faire mémoriser un fait à dalek sec" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!souvenir texte</button><p>Faire mémoriser un fait à Dalek Sec</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Profil Personnel"><header><span class="ico">👤</span><h2>Profil Personnel</h2></header><ul><li class="cmd" data-t="!mongenre m/f/n définir son genre (masculin/féminin/neutre)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!mongenre m/f/n</button><p>Définir son genre (masculin/féminin/neutre)</p></li><li class="cmd" data-t="!anniversaire jj/mm enregistrer son anniversaire" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!anniversaire JJ/MM</button><p>Enregistrer son anniversaire</p></li><li class="cmd" data-t="!corruption voir son niveau de corruption actuel" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!corruption</button><p>Voir son niveau de corruption actuel</p></li><li class="cmd" data-t="!rpg statut voir son profil rpg steampunk" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!rpg statut</button><p>Voir son profil RPG steampunk</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Wanted &amp; Primes"><header><span class="ico">⚠</span><h2>Wanted & Primes</h2></header><ul><li class="cmd" data-t="!wantedlist voir la liste des wanted actifs" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!wantedlist</button><p>Voir la liste des wanted actifs</p></li><li class="cmd" data-t="!capturer tenter de capturer un wanted" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!capturer</button><p>Tenter de capturer un wanted</p></li><li class="cmd" data-t="!wanted @pseudo x raison mettre une prime" data-b="mod" data-r="mod"><button class="nm" title="Copier la commande">!wanted @pseudo X raison</button><span class="bd b-mod">MOD</span><p>Mettre une prime</p></li><li class="cmd" data-t="!nowanted @pseudo retirer une prime" data-b="mod" data-r="mod"><button class="nm" title="Copier la commande">!nowanted @pseudo</button><span class="bd b-mod">MOD</span><p>Retirer une prime</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Infos Stream"><header><span class="ico">📊</span><h2>Infos Stream</h2></header><ul><li class="cmd" data-t="!uptime durée du stream en cours" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!uptime</button><p>Durée du stream en cours</p></li><li class="cmd" data-t="!jeu jeu en cours" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!jeu</button><p>Jeu en cours</p></li><li class="cmd" data-t="!viewers nombre de viewers actuels" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!viewers</button><p>Nombre de viewers actuels</p></li><li class="cmd" data-t="!stats stats de la session (morts, viewers...)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!stats</button><p>Stats de la session (morts, viewers...)</p></li><li class="cmd" data-t="!quetes voir les quêtes actives" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!quetes</button><p>Voir les quêtes actives</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Chaos &amp; Dingueries"><header><span class="ico">☢</span><h2>Chaos & Dingueries</h2><span class="bd b-new">NOUVEAU</span></header><ul><li class="cmd" data-t="!allin mise tous ses points sur un seul jet, tout ou rien" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!allin</button><p>Mise TOUS ses points sur un seul jet, tout ou rien</p></li><li class="cmd" data-t="!bourse voir le cours actuel de la vapeur" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!bourse</button><p>Voir le cours actuel de la Vapeur</p></li><li class="cmd" data-t="!investir x investir x points dans la vapeur (cours fluctuant)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!investir X</button><p>Investir X points dans la Vapeur (cours fluctuant)</p></li><li class="cmd" data-t="!vendre liquider toutes ses parts au cours actuel" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!vendre</button><p>Liquider toutes ses parts au cours actuel</p></li><li class="cmd" data-t="!reparer contribuer à désamorcer l&#x27;auto-destruction (si active)" data-b="" data-r="viewer"><button class="nm" title="Copier la commande">!reparer</button><p>Contribuer à désamorcer l'auto-destruction (si active)</p></li><li class="cmd" data-t="!clone invoquer le clone corrompu de dalek sec" data-b="streamer" data-r="streamer"><button class="nm" title="Copier la commande">!clone</button><span class="bd b-str">STREAMER</span><p>Invoquer le clone corrompu de Dalek Sec</p></li><li class="cmd" data-t="!surcharge 75s de réinterprétation aléatoire du chat" data-b="streamer" data-r="streamer"><button class="nm" title="Copier la commande">!surcharge</button><span class="bd b-str">STREAMER</span><p>75s de réinterprétation aléatoire du chat</p></li><li class="cmd" data-t="!source nomsource on|off afficher/masquer une source obs de la scène en cours" data-b="streamer" data-r="streamer"><button class="nm" title="Copier la commande">!source NomSource on|off</button><span class="bd b-str">STREAMER</span><p>Afficher/masquer une source OBS de la scène en cours</p></li><li class="cmd" data-t="!autodestruction [min] [seuil] compte à rebours collectif, explosion si échec" data-b="streamer" data-r="streamer"><button class="nm" title="Copier la commande">!autodestruction [min] [seuil]</button><span class="bd b-str">STREAMER</span><p>Compte à rebours collectif, explosion si échec</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+<section class="card" data-cat="Modération"><header><span class="ico">🛡</span><h2>Modération</h2><span class="bd b-mod">MODS</span></header><ul><li class="cmd" data-t="!genre @pseudo m/f/n définir le genre d&#x27;un viewer" data-b="" data-r="mod"><button class="nm" title="Copier la commande">!genre @pseudo m/f/n</button><p>Définir le genre d'un viewer</p></li><li class="cmd" data-t="!punition @pseudo punir un viewer" data-b="" data-r="mod"><button class="nm" title="Copier la commande">!punition @pseudo</button><p>Punir un viewer</p></li><li class="cmd" data-t="!grace @pseudo gracier un viewer" data-b="" data-r="mod"><button class="nm" title="Copier la commande">!grace @pseudo</button><p>Gracier un viewer</p></li><li class="cmd" data-t="!whitelist add/remove domaine gérer les liens autorisés" data-b="" data-r="mod"><button class="nm" title="Copier la commande">!whitelist add/remove domaine</button><p>Gérer les liens autorisés</p></li></ul><i class="rv tl"></i><i class="rv tr"></i><i class="rv bl"></i><i class="rv br"></i></section>
+</main>
+<div class="none" id="none">Aucune commande ne correspond à cette recherche, spécimen.</div>
+<footer>⚙ Dalek Sec — Archives permanentes — docteursmith83</footer>
+<div class="toast" id="toast"></div>
+<script>
+const q=document.getElementById('q'),cmds=[...document.querySelectorAll('.cmd')],cards=[...document.querySelectorAll('.card')];
+let r='viewer',nw=false;
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+const hint={viewer:'Commandes que tout le monde peut utiliser',mod:'Commandes réservées aux modérateurs',streamer:'Commandes réservées au streamer','':'Toutes les commandes'};
+function run(){
+  const t=norm(q.value.trim());let n=0;
+  cmds.forEach(c=>{
+    const ok=(!t||norm(c.dataset.t).includes(t))&&(!r||c.dataset.r===r)&&(!nw||c.dataset.b.includes('new'));
+    c.classList.toggle('hide',!ok);if(ok)n++;
+  });
+  cards.forEach(c=>c.classList.toggle('hide',!c.querySelector('.cmd:not(.hide)')));
+  document.getElementById('none').style.display=n?'none':'block';
+  document.getElementById('count').textContent=hint[r]+' — '+n+' commande'+(n>1?'s':'')+' · clique pour copier';
+}
+q.addEventListener('input',run);
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('#tabs .chip').forEach(x=>x.classList.toggle('on',x===b));r=b.dataset.r;run();
+});
+document.getElementById('nw').addEventListener('click',e=>{nw=!nw;e.currentTarget.classList.toggle('on',nw);run()});
+run();
+const toast=document.getElementById('toast');let tt;
+document.getElementById('grid').addEventListener('click',e=>{
+  const b=e.target.closest('.nm');if(!b)return;
+  const txt=b.textContent.trim();
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{}).finally(()=>{
+    toast.textContent=txt+' copié';toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1400)});
+});
+</script>
 </body>
 </html>
